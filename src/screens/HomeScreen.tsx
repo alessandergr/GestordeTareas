@@ -27,7 +27,6 @@ export default function HomeScreen({ navigation }: any) {
           <Feather name="plus" size={24} color={colors.white} />
         </TouchableOpacity>
       </View>
-  //Estas son nuestras tareas practicamente y tambien agregando la funcion a sus opciones//
       <FlatList
         data={tareas}
         keyExtractor={(item) => item.id}
