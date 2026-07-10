@@ -1,7 +1,7 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, ReactNode, useReducer } from 'react';
 import { Task } from '../models/Task';
 
-//Tarea predefinida we//
+// Tarea predefinida
 const tareasIniciales: Task[] = [
   {
     id: '1',
@@ -10,8 +10,14 @@ const tareasIniciales: Task[] = [
   },
 ];
 
-//Nuestro cerebro, es que hace que el CRUD funcione//
-function reducer(tareas: Task[], accion: any) {
+// Tipos de acciones
+type Action =
+  | { type: 'AGREGAR'; payload: Task }
+  | { type: 'EDITAR'; payload: Task }
+  | { type: 'ELIMINAR'; payload: string };
+
+// Reducer
+function reducer(tareas: Task[], accion: Action): Task[] {
   switch (accion.type) {
     case 'AGREGAR':
       return [...tareas, accion.payload];
@@ -28,11 +34,23 @@ function reducer(tareas: Task[], accion: any) {
       return tareas;
   }
 }
-//este viene en null pero luego se llena
-export const TaskContext = createContext<any>(null);
 
-//es una caja de la cual podemos agarrar funciones
-export function TaskProvider({ children }: any) {
+// Tipo del contexto
+interface TaskContextType {
+  tareas: Task[];
+  agregarTarea: (tarea: Task) => void;
+  editarTarea: (tarea: Task) => void;
+  eliminarTarea: (id: string) => void;
+}
+
+export const TaskContext = createContext<TaskContextType | null>(null);
+
+// Props
+interface Props {
+  children: ReactNode;
+}
+
+export function TaskProvider({ children }: Props) {
   const [tareas, dispatch] = useReducer(reducer, tareasIniciales);
 
   const agregarTarea = (tarea: Task) =>
