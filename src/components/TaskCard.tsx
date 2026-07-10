@@ -40,12 +40,12 @@ export default function TaskCard({
       </View>
 
       <View style={styles.botones}>
-        <TouchableOpacity onPress={onEdit}>
-          <Feather name="edit-2" size={20} color={colors.primary} />
+        <TouchableOpacity style={styles.icono} onPress={onEdit}>
+          <Feather name="edit-2" size={18} color={colors.primary} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onDelete}>
-          <Feather name="trash-2" size={20} color={colors.danger} />
+        <TouchableOpacity style={styles.icono} onPress={onDelete}>
+          <Feather name="trash-2" size={18} color={colors.danger} />
         </TouchableOpacity>
       </View>
     </View>
@@ -54,47 +54,56 @@ export default function TaskCard({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.white,
-    borderRadius: 10,
-    padding: 15,
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: 18,
     marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
 
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+    elevation: 6,
   },
 
   info: {
     flex: 1,
-    marginRight: 10,
+    marginRight: 12,
   },
 
   titulo: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: 'bold',
     color: colors.black,
-    marginBottom: 5,
+    marginBottom: 6,
   },
 
   descripcion: {
     fontSize: 14,
     color: colors.gray,
+    lineHeight: 20,
   },
 
   verMas: {
-    marginTop: 5,
+    marginTop: 8,
     color: colors.primary,
     fontWeight: '600',
   },
 
   botones: {
-    flexDirection: 'row',
-    gap: 15,
-    marginTop: 5,
+    gap: 10,
+  },
+
+  icono: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: '#F3F4F6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
   },
 });

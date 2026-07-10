@@ -21,7 +21,10 @@ export default function HomeScreen({ navigation }: any) {
       'Eliminar tarea',
       '¿Deseas eliminar esta tarea?',
       [
-        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
         {
           text: 'Eliminar',
           style: 'destructive',
@@ -42,7 +45,7 @@ export default function HomeScreen({ navigation }: any) {
             navigation.navigate('TaskForm', { isEditing: false })
           }
         >
-          <Feather name="plus" size={24} color={colors.white} />
+          <Feather name="plus" size={28} color={colors.white} />
         </TouchableOpacity>
       </View>
 
@@ -65,8 +68,16 @@ export default function HomeScreen({ navigation }: any) {
         contentContainerStyle={styles.lista}
         ListEmptyComponent={
           <View style={styles.vacio}>
-            <Feather name="clipboard" size={70} color={colors.lightGray} />
-            <Text style={styles.tituloVacio}>No tienes tareas</Text>
+            <Feather
+              name="clipboard"
+              size={70}
+              color={colors.lightGray}
+            />
+
+            <Text style={styles.tituloVacio}>
+              No tienes tareas
+            </Text>
+
             <Text style={styles.textoVacio}>
               ¡Comienza creando tu primera tarea!
             </Text>
@@ -93,18 +104,27 @@ const styles = StyleSheet.create({
   },
 
   titulo: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
     color: colors.black,
   },
 
   boton: {
-    width: 45,
-    height: 45,
-    borderRadius: 25,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 5,
+    elevation: 8,
   },
 
   lista: {
@@ -121,15 +141,15 @@ const styles = StyleSheet.create({
   },
 
   tituloVacio: {
-    marginTop: 15,
-    fontSize: 20,
+    marginTop: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: colors.gray,
   },
 
   textoVacio: {
-    marginTop: 8,
-    fontSize: 15,
+    marginTop: 10,
+    fontSize: 16,
     color: colors.gray,
     textAlign: 'center',
     paddingHorizontal: 40,

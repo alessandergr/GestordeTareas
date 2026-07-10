@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
 
   titulo: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: colors.black,
   },
@@ -155,19 +155,29 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    marginTop: 15,
-    marginBottom: 5,
+    marginTop: 18,
+    marginBottom: 6,
     color: colors.gray,
     fontSize: 15,
+    fontWeight: '600',
   },
 
   input: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.card,
     borderWidth: 1,
     borderColor: colors.lightGray,
-    borderRadius: 10,
+    borderRadius: 14,
     padding: 15,
     fontSize: 16,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 3,
   },
 
   textArea: {
@@ -177,20 +187,30 @@ const styles = StyleSheet.create({
 
   error: {
     color: colors.danger,
-    marginTop: 5,
+    marginTop: 6,
+    marginLeft: 4,
   },
 
   boton: {
     backgroundColor: colors.primary,
     margin: 20,
-    padding: 15,
-    borderRadius: 10,
+    padding: 16,
+    borderRadius: 14,
     alignItems: 'center',
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.18,
+    shadowRadius: 5,
+    elevation: 6,
   },
 
   textoBoton: {
     color: colors.white,
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: 'bold',
   },
 });
