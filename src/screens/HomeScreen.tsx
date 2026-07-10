@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 
 import TaskCard from '../components/TaskCard';
 import { TaskContext } from '../context/TaskContext';
-import colors from '../utils/colors';
+import colors from '../theme/colors';
 
 //Navegador de paginas
 export default function HomeScreen({ navigation }: any) {

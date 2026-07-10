@@ -4,7 +4,7 @@ import { View,Text,TextInput,TouchableOpacity,StyleSheet,
 import { Feather } from '@expo/vector-icons';
 
 import { TaskContext } from '../context/TaskContext';
-import colors from '../utils/colors';
+import colors from '../theme/colors';
 
 //Si esta vacio te lo da vacio si editas no, el inicio es solo para editar si ya esta
 export default function TaskFormScreen({ navigation, route }: any) {
