@@ -8,6 +8,7 @@ interface Props {
   descripcion: string;
   onEdit: () => void;
   onDelete: () => void;
+  onView: () => void;
 }
 
 export default function TaskCard({
@@ -15,6 +16,7 @@ export default function TaskCard({
   descripcion,
   onEdit,
   onDelete,
+  onView,
 }: Props) {
   const [expandido, setExpandido] = useState(false);
 
@@ -25,16 +27,14 @@ export default function TaskCard({
 
         <Text
           style={styles.descripcion}
-          numberOfLines={expandido ? undefined : 3}
+          numberOfLines={3}
         >
           {descripcion}
         </Text>
 
         {descripcion.length > 80 && (
-          <TouchableOpacity onPress={() => setExpandido(!expandido)}>
-            <Text style={styles.verMas}>
-              {expandido ? 'Ver menos' : 'Ver más'}
-            </Text>
+          <TouchableOpacity onPress={onView}>
+            <Text style={styles.verMas}>Ver más</Text>
           </TouchableOpacity>
         )}
       </View>

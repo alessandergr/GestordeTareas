@@ -8,6 +8,7 @@ import { BottomTabParamList, RootStackParamList} from './src/types/navigation';
 import HomeScreen from './src/screens/HomeScreen';
 import TaskFormScreen from './src/screens/TaskFormScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import TaskDetailScreen from './src/screens/TaskDetailScreen';
 
 
 import { TaskProvider } from './src/context/TaskContext';
@@ -79,12 +80,18 @@ export default function App() {
     <TaskProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Main" component={MainTabs} />
-          <Stack.Screen
-            name="TaskForm"
-            component={TaskFormScreen}
-          />
-        </Stack.Navigator>
+        <Stack.Screen name="Main" component={MainTabs} />
+
+        <Stack.Screen
+          name="TaskForm"
+          component={TaskFormScreen}
+        />
+
+        <Stack.Screen
+          name="TaskDetail"
+          component={TaskDetailScreen}
+        />
+      </Stack.Navigator>
       </NavigationContainer>
     </TaskProvider>
   );

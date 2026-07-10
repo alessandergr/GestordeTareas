@@ -85,6 +85,11 @@ export default function HomeScreen({ navigation }: Props) {
               })
             }
             onDelete={() => confirmarEliminar(item.id)}
+            onView={() =>
+              navigation.navigate('TaskDetail', {
+                task: item,
+              })
+            }
           />
         )}
         contentContainerStyle={styles.lista}
