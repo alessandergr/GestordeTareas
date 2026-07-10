@@ -1,5 +1,11 @@
 import React, { useContext } from 'react';
-import { View,Text,StyleSheet,FlatList,TouchableOpacity,
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
@@ -7,12 +13,29 @@ import TaskCard from '../components/TaskCard';
 import { TaskContext } from '../context/TaskContext';
 import colors from '../theme/colors';
 
-//Navegador de paginas
+// Navegador de paginas
 export default function HomeScreen({ navigation }: any) {
-  //trae el taskContext
   const { tareas, eliminarTarea } = useContext(TaskContext);
 
-  //Nuestra pantalla, taskform nos lleva a donde agregamos una tarea
+  // Confirmar antes de eliminar
+  function confirmarEliminar(id: string) {
+    Alert.alert(
+      'Eliminar tarea',
+      '¿Deseas eliminar esta tarea?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          style: 'destructive',
+          onPress: () => eliminarTarea(id),
+        },
+      ]
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -27,6 +50,7 @@ export default function HomeScreen({ navigation }: any) {
           <Feather name="plus" size={24} color={colors.white} />
         </TouchableOpacity>
       </View>
+
       <FlatList
         data={tareas}
         keyExtractor={(item) => item.id}
@@ -40,7 +64,7 @@ export default function HomeScreen({ navigation }: any) {
                 task: item,
               })
             }
-            onDelete={() => eliminarTarea(item.id)}
+            onDelete={() => confirmarEliminar(item.id)}
           />
         )}
         contentContainerStyle={styles.lista}
