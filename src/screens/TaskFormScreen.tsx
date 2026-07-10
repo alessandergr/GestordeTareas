@@ -12,13 +12,31 @@ import {
   ScrollView,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/navigation';
 
 import { TaskContext } from '../context/TaskContext';
+import { Task } from '../models/Task';
 import colors from '../theme/colors';
 
-export default function TaskFormScreen({ navigation, route }: any) {
+type Props = NativeStackScreenProps<
+  RootStackParamList,
+  'TaskForm'
+>;
+
+export default function TaskFormScreen({
+  navigation,
+  route,
+}: Props) {
   const { isEditing, task } = route.params || {};
-  const { agregarTarea, editarTarea } = useContext(TaskContext);
+
+  const taskContext = useContext(TaskContext);
+
+  if (!taskContext) {
+    return null;
+  }
+
+  const { agregarTarea, editarTarea } = taskContext;
 
   const [titulo, setTitulo] = useState(task?.titulo || '');
   const [descripcion, setDescripcion] = useState(task?.descripcion || '');
@@ -44,7 +62,7 @@ export default function TaskFormScreen({ navigation, route }: any) {
 
     if (!valido) return;
 
-    const nuevaTarea = {
+    const nuevaTarea: Task = {
       id: task?.id || Date.now().toString(),
       titulo,
       descripcion,
@@ -91,7 +109,9 @@ export default function TaskFormScreen({ navigation, route }: any) {
               value={titulo}
               onChangeText={(texto) => {
                 setTitulo(texto);
-                if (errorTitulo) setErrorTitulo('');
+                if (errorTitulo) {
+                  setErrorTitulo('');
+                }
               }}
             />
 
@@ -107,7 +127,9 @@ export default function TaskFormScreen({ navigation, route }: any) {
               value={descripcion}
               onChangeText={(texto) => {
                 setDescripcion(texto);
-                if (errorDescripcion) setErrorDescripcion('');
+                if (errorDescripcion) {
+                  setErrorDescripcion('');
+                }
               }}
               multiline
             />
@@ -117,7 +139,10 @@ export default function TaskFormScreen({ navigation, route }: any) {
             )}
           </View>
 
-          <TouchableOpacity style={styles.boton} onPress={guardar}>
+          <TouchableOpacity
+            style={styles.boton}
+            onPress={guardar}
+          >
             <Text style={styles.textoBoton}>
               {isEditing ? 'Guardar cambios' : 'Crear tarea'}
             </Text>
@@ -171,10 +196,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
 
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.06,
     shadowRadius: 4,
     elevation: 3,
@@ -199,10 +221,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.18,
     shadowRadius: 5,
     elevation: 6,

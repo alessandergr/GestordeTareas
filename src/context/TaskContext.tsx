@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useReducer } from 'react';
 import { Task } from '../models/Task';
 
-// Tarea predefinida
+// Tarea inicial
 const tareasIniciales: Task[] = [
   {
     id: '1',
@@ -10,7 +10,7 @@ const tareasIniciales: Task[] = [
   },
 ];
 
-// Tipos de acciones
+// Acciones del reducer
 type Action =
   | { type: 'AGREGAR'; payload: Task }
   | { type: 'EDITAR'; payload: Task }
@@ -64,7 +64,12 @@ export function TaskProvider({ children }: Props) {
 
   return (
     <TaskContext.Provider
-      value={{ tareas, agregarTarea, editarTarea, eliminarTarea }}
+      value={{
+        tareas,
+        agregarTarea,
+        editarTarea,
+        eliminarTarea,
+      }}
     >
       {children}
     </TaskContext.Provider>

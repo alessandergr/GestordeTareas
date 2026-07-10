@@ -8,13 +8,33 @@ import {
   Alert,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import {
+  RootStackParamList,
+  BottomTabParamList,
+} from '../types/navigation';
 
 import TaskCard from '../components/TaskCard';
 import { TaskContext } from '../context/TaskContext';
+import { Task } from '../models/Task';
 import colors from '../theme/colors';
 
-export default function HomeScreen({ navigation }: any) {
-  const { tareas, eliminarTarea } = useContext(TaskContext);
+type Props = CompositeScreenProps<
+  BottomTabScreenProps<BottomTabParamList, 'Tareas'>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
+export default function HomeScreen({ navigation }: Props) {
+  const taskContext = useContext(TaskContext);
+
+  if (!taskContext) {
+    return null;
+  }
+
+  const { tareas, eliminarTarea } = taskContext;
 
   function confirmarEliminar(id: string) {
     Alert.alert(
@@ -42,7 +62,9 @@ export default function HomeScreen({ navigation }: any) {
         <TouchableOpacity
           style={styles.boton}
           onPress={() =>
-            navigation.navigate('TaskForm', { isEditing: false })
+            navigation.navigate('TaskForm', {
+              isEditing: false,
+            })
           }
         >
           <Feather name="plus" size={28} color={colors.white} />

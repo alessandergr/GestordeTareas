@@ -3,16 +3,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
+import { BottomTabParamList, RootStackParamList} from './src/types/navigation';
 
 import HomeScreen from './src/screens/HomeScreen';
 import TaskFormScreen from './src/screens/TaskFormScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
+
 import { TaskProvider } from './src/context/TaskContext';
 import colors from './src/theme/colors';
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 function MainTabs() {
   return (
@@ -28,14 +30,11 @@ function MainTabs() {
           bottom: 20,
           left: 20,
           right: 20,
-
           height: 65,
-
           borderRadius: 20,
-
           backgroundColor: colors.white,
 
-          elevation: 8,
+          borderTopWidth: 0,
 
           shadowColor: '#000',
           shadowOffset: {
@@ -44,8 +43,7 @@ function MainTabs() {
           },
           shadowOpacity: 0.15,
           shadowRadius: 8,
-
-          borderTopWidth: 0,
+          elevation: 8,
         },
 
         tabBarLabelStyle: {
@@ -54,7 +52,7 @@ function MainTabs() {
         },
 
         tabBarIcon: ({ color, size }) => {
-          let icono: any = 'check-square';
+          let icono: keyof typeof Feather.glyphMap = 'check-square';
 
           if (route.name === 'Ajustes') {
             icono = 'settings';
@@ -82,7 +80,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Main" component={MainTabs} />
-          <Stack.Screen name="TaskForm" component={TaskFormScreen} />
+          <Stack.Screen
+            name="TaskForm"
+            component={TaskFormScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </TaskProvider>
