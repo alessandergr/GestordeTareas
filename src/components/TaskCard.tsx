@@ -1,27 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import colors from '../theme/colors';
 
-// Datos que recibira la tarjeta :0//
 interface Props {
   titulo: string;
   descripcion: string;
   onEdit: () => void;
   onDelete: () => void;
 }
-// Datos que necesitara nuestra tarjeta, son las tarjetas que salen en home//
+
 export default function TaskCard({
   titulo,
   descripcion,
   onEdit,
   onDelete,
 }: Props) {
+  const [expandido, setExpandido] = useState(false);
+
   return (
     <View style={styles.card}>
       <View style={styles.info}>
         <Text style={styles.titulo}>{titulo}</Text>
-        <Text style={styles.descripcion}>{descripcion}</Text>
+
+        <Text
+          style={styles.descripcion}
+          numberOfLines={expandido ? undefined : 3}
+        >
+          {descripcion}
+        </Text>
+
+        {descripcion.length > 80 && (
+          <TouchableOpacity onPress={() => setExpandido(!expandido)}>
+            <Text style={styles.verMas}>
+              {expandido ? 'Ver menos' : 'Ver más'}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
 
       <View style={styles.botones}>
@@ -36,7 +51,7 @@ export default function TaskCard({
     </View>
   );
 }
-//diseno//
+
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.white,
@@ -45,7 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
 
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -71,8 +86,15 @@ const styles = StyleSheet.create({
     color: colors.gray,
   },
 
+  verMas: {
+    marginTop: 5,
+    color: colors.primary,
+    fontWeight: '600',
+  },
+
   botones: {
     flexDirection: 'row',
     gap: 15,
+    marginTop: 5,
   },
 });
