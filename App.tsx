@@ -9,17 +9,49 @@ import TaskFormScreen from './src/screens/TaskFormScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
 import { TaskProvider } from './src/context/TaskContext';
+import colors from './src/theme/colors';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-// Diseno de nuetro home
+
 function MainTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#6A3CE8',
-        tabBarInactiveTintColor: '#999999',
+
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.gray,
+
+        tabBarStyle: {
+          position: 'absolute',
+          bottom: 20,
+          left: 20,
+          right: 20,
+
+          height: 65,
+
+          borderRadius: 20,
+
+          backgroundColor: colors.white,
+
+          elevation: 8,
+
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.15,
+          shadowRadius: 8,
+
+          borderTopWidth: 0,
+        },
+
+        tabBarLabelStyle: {
+          fontSize: 12,
+          marginBottom: 5,
+        },
 
         tabBarIcon: ({ color, size }) => {
           let icono: any = 'check-square';
@@ -28,7 +60,13 @@ function MainTabs() {
             icono = 'settings';
           }
 
-          return <Feather name={icono} size={size} color={color} />;
+          return (
+            <Feather
+              name={icono}
+              size={size}
+              color={color}
+            />
+          );
         },
       })}
     >
@@ -38,7 +76,6 @@ function MainTabs() {
   );
 }
 
-//Aqui nos movemos y aparte nos dejan tambien usar el CRUD//
 export default function App() {
   return (
     <TaskProvider>
