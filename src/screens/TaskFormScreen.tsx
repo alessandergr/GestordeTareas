@@ -1,12 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { View,Text,TextInput,TouchableOpacity,StyleSheet,
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 import { TaskContext } from '../context/TaskContext';
 import colors from '../theme/colors';
 
-//Si esta vacio te lo da vacio si editas no, el inicio es solo para editar si ya esta
+// Si está vacío te lo da vacío, si editas no
 export default function TaskFormScreen({ navigation, route }: any) {
   const { isEditing, task } = route.params || {};
   const { agregarTarea, editarTarea } = useContext(TaskContext);
@@ -17,7 +22,6 @@ export default function TaskFormScreen({ navigation, route }: any) {
   const [errorTitulo, setErrorTitulo] = useState('');
   const [errorDescripcion, setErrorDescripcion] = useState('');
 
-  //aqui guarda, tenemos validacion, tambien verifica si estamos editando o añadiendo
   function guardar() {
     setErrorTitulo('');
     setErrorDescripcion('');
@@ -25,12 +29,12 @@ export default function TaskFormScreen({ navigation, route }: any) {
     let valido = true;
 
     if (titulo.trim() === '') {
-      setErrorTitulo('Ingrese un titulo');
+      setErrorTitulo('Ingrese un título');
       valido = false;
     }
 
     if (descripcion.trim() === '') {
-      setErrorDescripcion('Ingrese una descripcion');
+      setErrorDescripcion('Ingrese una descripción');
       valido = false;
     }
 
@@ -51,7 +55,6 @@ export default function TaskFormScreen({ navigation, route }: any) {
     navigation.goBack();
   }
 
-  //Es el diseno de la pagina, tiene validaciones si en caso intentas apretar el boton sin colocar 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -67,13 +70,16 @@ export default function TaskFormScreen({ navigation, route }: any) {
       </View>
 
       <View style={styles.formulario}>
-        <Text style={styles.label}>Titulo</Text>
+        <Text style={styles.label}>Título</Text>
 
         <TextInput
           style={styles.input}
-          placeholder="Escribe un titulo"
+          placeholder="Escribe un título"
           value={titulo}
-          onChangeText={setTitulo}
+          onChangeText={(texto) => {
+            setTitulo(texto);
+            if (errorTitulo) setErrorTitulo('');
+          }}
         />
 
         {errorTitulo !== '' && (
@@ -86,7 +92,10 @@ export default function TaskFormScreen({ navigation, route }: any) {
           style={[styles.input, styles.textArea]}
           placeholder="Escribe una descripción"
           value={descripcion}
-          onChangeText={setDescripcion}
+          onChangeText={(texto) => {
+            setDescripcion(texto);
+            if (errorDescripcion) setErrorDescripcion('');
+          }}
           multiline
         />
 
