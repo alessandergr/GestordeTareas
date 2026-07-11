@@ -27,9 +27,10 @@ function MainTabs() {
         tabBarInactiveTintColor: colors.gray,
 
        tabBarStyle: {
-          height: 70,
+            height: 60,
 
-          marginBottom: -15,
+          paddingTop: 6,
+          paddingBottom: 6,
 
           backgroundColor: colors.white,
 
@@ -42,7 +43,7 @@ function MainTabs() {
           shadowOpacity: 0,
           shadowRadius: 0,
           elevation: 0,
-        },
+                },
 
         tabBarItemStyle: {
           justifyContent: 'center',
@@ -50,12 +51,12 @@ function MainTabs() {
         },
 
         tabBarIconStyle: {
-          marginTop: 4,
+           marginTop: -2,
         },
 
         tabBarLabelStyle: {
           fontSize: 12,
-          marginBottom: 6,
+          marginBottom: 4,
         },
 
         tabBarIcon: ({ color, size }) => {
