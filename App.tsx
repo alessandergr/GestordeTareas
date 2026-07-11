@@ -3,13 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
-import { BottomTabParamList, RootStackParamList} from './src/types/navigation';
+
+import { BottomTabParamList, RootStackParamList } from './src/types/navigation';
 
 import HomeScreen from './src/screens/HomeScreen';
 import TaskFormScreen from './src/screens/TaskFormScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import TaskDetailScreen from './src/screens/TaskDetailScreen';
-
 
 import { TaskProvider } from './src/context/TaskContext';
 import colors from './src/theme/colors';
@@ -26,30 +26,36 @@ function MainTabs() {
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.gray,
 
-        tabBarStyle: {
-          position: 'absolute',
-          bottom: 20,
-          left: 20,
-          right: 20,
-          height: 65,
-          borderRadius: 20,
+       tabBarStyle: {
+          height: 70,
+
+          marginBottom: -15,
+
           backgroundColor: colors.white,
 
           borderTopWidth: 0,
 
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 4,
-          },
-          shadowOpacity: 0.15,
-          shadowRadius: 8,
-          elevation: 8,
+          borderTopLeftRadius: 25,
+          borderTopRightRadius: 25,
+
+          shadowColor: 'transparent',
+          shadowOpacity: 0,
+          shadowRadius: 0,
+          elevation: 0,
+        },
+
+        tabBarItemStyle: {
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+
+        tabBarIconStyle: {
+          marginTop: 4,
         },
 
         tabBarLabelStyle: {
           fontSize: 12,
-          marginBottom: 5,
+          marginBottom: 6,
         },
 
         tabBarIcon: ({ color, size }) => {
@@ -69,8 +75,15 @@ function MainTabs() {
         },
       })}
     >
-      <Tab.Screen name="Tareas" component={HomeScreen} />
-      <Tab.Screen name="Ajustes" component={SettingsScreen} />
+      <Tab.Screen
+        name="Tareas"
+        component={HomeScreen}
+      />
+
+      <Tab.Screen
+        name="Ajustes"
+        component={SettingsScreen}
+      />
     </Tab.Navigator>
   );
 }
@@ -80,18 +93,21 @@ export default function App() {
     <TaskProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Main" component={MainTabs} />
+          <Stack.Screen
+            name="Main"
+            component={MainTabs}
+          />
 
-        <Stack.Screen
-          name="TaskForm"
-          component={TaskFormScreen}
-        />
+          <Stack.Screen
+            name="TaskForm"
+            component={TaskFormScreen}
+          />
 
-        <Stack.Screen
-          name="TaskDetail"
-          component={TaskDetailScreen}
-        />
-      </Stack.Navigator>
+          <Stack.Screen
+            name="TaskDetail"
+            component={TaskDetailScreen}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
     </TaskProvider>
   );

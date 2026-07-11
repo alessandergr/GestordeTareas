@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import colors from '../theme/colors';
@@ -18,8 +18,6 @@ export default function TaskCard({
   onDelete,
   onView,
 }: Props) {
-  const [expandido, setExpandido] = useState(false);
-
   return (
     <View style={styles.card}>
       <View style={styles.info}>
@@ -32,20 +30,39 @@ export default function TaskCard({
           {descripcion}
         </Text>
 
-        {descripcion.length > 80 && (
-          <TouchableOpacity onPress={onView}>
-            <Text style={styles.verMas}>Ver más</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          style={styles.verDetalle}
+          onPress={onView}
+        >
+          <Feather
+            name="eye"
+            size={18}
+            color={colors.primary}
+          />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.botones}>
-        <TouchableOpacity style={styles.icono} onPress={onEdit}>
-          <Feather name="edit-2" size={18} color={colors.primary} />
+        <TouchableOpacity
+          style={styles.icono}
+          onPress={onEdit}
+        >
+          <Feather
+            name="edit-2"
+            size={18}
+            color={colors.primary}
+          />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.icono} onPress={onDelete}>
-          <Feather name="trash-2" size={18} color={colors.danger} />
+        <TouchableOpacity
+          style={styles.icono}
+          onPress={onDelete}
+        >
+          <Feather
+            name="trash-2"
+            size={18}
+            color={colors.danger}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -63,7 +80,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
 
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
     shadowOpacity: 0.12,
     shadowRadius: 6,
     elevation: 6,
@@ -87,10 +107,14 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
 
-  verMas: {
-    marginTop: 8,
-    color: colors.primary,
-    fontWeight: '600',
+  verDetalle: {
+    marginTop: 12,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#F3F4F6',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   botones: {

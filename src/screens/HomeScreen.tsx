@@ -154,17 +154,18 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
 
-  lista: {
+   lista: {
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: 70,
     flexGrow: 1,
-  },
+    },
 
   vacio: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 120,
+    paddingHorizontal: 30,
+    marginBottom: 80,
   },
 
   tituloVacio: {
